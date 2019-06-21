@@ -9,3 +9,9 @@ def test_repeated_single_letter():
 
 def test_not_first_unique_substring():
     assert longest_substring.Solution().length_of_longest_substring("pwwkew") == 3
+
+def test_whitespace_string():
+    assert longest_substring.Solution().length_of_longest_substring(" ") == 1
+
+def test_sliding_window():
+    assert longest_substring.Solution().length_of_longest_substring("dvdf") == 3

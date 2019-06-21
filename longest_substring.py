@@ -1,16 +1,14 @@
 class Solution:
     def length_of_longest_substring(self, s: str) -> int:
         visited = []
-        global_max = 0
-        local_max = 0
+        max_length = 0
 
         for l in s:
             if l in visited:
-                global_max = max(local_max, global_max)
-                visited = [l]
-                local_max = 1
-            else:
-                visited.append(l)
-                local_max+= 1
+                index = visited.index(l)
+                visited = visited[index+1:]
 
-        return global_max
+            visited.append(l)
+            max_length = max(max_length, len(visited))
+
+        return max_length
