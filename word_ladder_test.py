@@ -1,5 +1,6 @@
 import word_ladder
 import pytest
+import test
 
 def test_standard_transformations():
     begin_word = "hit"
@@ -8,12 +9,19 @@ def test_standard_transformations():
 
     assert word_ladder.Solution().ladder_length(begin_word, end_word, word_list) == 5
 
-def test_end_word_not_word_list():
+def test_end_word_not_in_word_list():
     begin_word = "hit"
     end_word = "cog"
     word_list = ["hot","dot","dog","lot","log"]
 
     assert word_ladder.Solution().ladder_length(begin_word, end_word, word_list) == 0
+
+def test_for_optimization():
+    begin_word = "sand"
+    end_word = "acne"
+    word_list = test.word_list
+
+    assert word_ladder.Solution().ladder_length(begin_word, end_word, word_list) == 2
 
 def test_are_neighbors_happy():
     w1 = "hit"
