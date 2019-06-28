@@ -1,4 +1,5 @@
 from typing import List
+from collections import deque
 import pdb
 
 class Node:
@@ -17,8 +18,8 @@ class Solution:
         start_queue = [start_vertex]
         end_queue = [end_vertex]
 
-        start_visited = [start_vertex.value]
-        end_visited = [end_vertex.value]
+        start_visited = {start_vertex.value: start_vertex.length}
+        end_visited = {end_vertex.value: end_vertex.length}
 
         while len(start_queue) > 0 or len(end_queue) > 0:
             if len(start_queue) > 0:
@@ -27,31 +28,43 @@ class Solution:
                 if start_current.value == end_word:
                     return start_current.length
 
+                if start_current.value in end_visited.keys():
+                    length = start_current.length + end_visited[start_current.value] - 1
+                    return length
+
                 for w in word_list:
-                    if w not in start_visited and self.neighbors(start_current.value, w):
-                        print(w)
-                        start_queue.append(Node(w, start_current.length + 1))
-                        start_visited.append(w)
+                    if w not in start_visited.keys() and self.neighbors(start_current.value, w):
+                        if w == end_word:
+                            return start_current.length + 1
+                        node = Node(w, start_current.length + 1)
+                        start_queue.append(node)
+                        start_visited[node.value] = node.length
 
             if len(end_queue) > 0:
                 end_current = end_queue.pop(0)
-                print(end_current)
 
                 if end_current.value == begin_word:
                     return end_current.length
 
                 if end_current.value == start_current.value:
-                    length = end_current.length + start_current.length
+                    length = end_current.length + start_current.length - 1
                     return length 
+                
+                if end_current.value in start_visited.keys():
+                    length = end_current.length + start_visited[end_current.value] - 1
+                    return length
 
                 for w in word_list:
-                    if w not in end_visited and self.neighbors(end_current.value, w):
-                        end_queue.append(Node(w, end_current.length + 1))
-                        end_visited.append(w)
+                    if w not in end_visited.keys() and self.neighbors(end_current.value, w):
+                        if w == begin_word:
+                            return end_current.length + 1
+                        node = Node(w, end_current.length + 1)
+                        end_queue.append(node)
+                        end_visited[node.value] = node.length
 
         return 0
 
-    def neighbors(self, word_one, word_two):
+    def neighbors(self, word_one: str, word_two: str) -> bool:
         counter = 0
 
         for i in range(len(word_one)):
