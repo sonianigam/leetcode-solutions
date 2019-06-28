@@ -1,6 +1,5 @@
 from typing import List
 from collections import deque, defaultdict
-import pdb
 
 class Node:
     def __init__(self, value, length):
@@ -34,17 +33,19 @@ class Solution:
                     length = start_current.length + end_visited[start_current.value] - 1
                     return length
 
+                s_current_neighbors = []
+
                 for i in range(len(start_current.value)):
                     key = start_current.value[:i] + "*" + start_current.value[i+1:]
-                    word_neighbors = neighbors_dict[key]
+                    s_current_neighbors.extend(neighbors_dict[key])
 
-                    for w in word_neighbors:
-                        if w not in start_visited.keys():
-                            if w == end_word:
-                                return start_current.length + 1
-                            node = Node(w, start_current.length + 1)
-                            start_queue.append(node)
-                            start_visited[node.value] = node.length
+                for w in s_current_neighbors:
+                    if w not in start_visited.keys():
+                        if w == end_word:
+                            return start_current.length + 1
+                        node = Node(w, start_current.length + 1)
+                        start_queue.append(node)
+                        start_visited[node.value] = node.length
 
             if len(end_queue) > 0:
                 end_current = end_queue.popleft()
@@ -56,17 +57,19 @@ class Solution:
                     length = end_current.length + start_visited[end_current.value] - 1
                     return length
 
+                e_current_neighbors = []
+
                 for i in range(len(end_current.value)):
                     key = end_current.value[:i] + "*" + end_current.value[i+1:]
-                    word_neighbors = neighbors_dict[key]
+                    e_current_neighbors.extend(neighbors_dict[key])
 
-                    for w in word_neighbors:
-                        if w not in end_visited.keys():
-                            if w == begin_word:
-                                return end_current.length + 1
-                            node = Node(w, end_current.length + 1)
-                            end_queue.append(node)
-                            end_visited[node.value] = node.length
+                for w in e_current_neighbors:
+                    if w not in end_visited.keys():
+                        if w == begin_word:
+                            return end_current.length + 1
+                        node = Node(w, end_current.length + 1)
+                        end_queue.append(node)
+                        end_visited[node.value] = node.length
 
         return 0
 

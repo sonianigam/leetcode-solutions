@@ -37,14 +37,6 @@ def test_failed_use_case_two():
 
     assert word_ladder.Solution().ladder_length(begin_word, end_word, word_list) == 4
 
-def test_for_optimization():
-    begin_word = "charge"
-    end_word = "comedo"
-    word_list = test.word_list
-
-    #this number is arbitrary, just want it to complete
-    assert word_ladder.Solution().ladder_length(begin_word, end_word, word_list) == 2
-
 def test_neighbors_happy():
     word_list = ["it", "is"]
     num = 2
