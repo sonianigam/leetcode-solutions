@@ -45,14 +45,10 @@ def test_for_optimization():
     #this number is arbitrary, just want it to complete
     assert word_ladder.Solution().ladder_length(begin_word, end_word, word_list) == 2
 
-def test_are_neighbors_happy():
-    w1 = "hit"
-    w2 = "hot"
+def test_neighbors_happy():
+    word_list = ["it", "is"]
+    num = 2
 
-    assert word_ladder.Solution().neighbors(w1, w2) == True
+    result = {"i*": ["it", "is"], "*t": ["it"], "*s": ["is"]}
 
-def test_are_neighbors_sad():
-    w1 = "pit"
-    w2 = "lot"
-
-    assert word_ladder.Solution().neighbors(w1, w2) == False
+    assert word_ladder.Solution().neighbors(word_list, num) == result
