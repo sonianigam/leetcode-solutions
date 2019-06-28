@@ -23,53 +23,51 @@ class Solution:
         neighbors_dict = self.neighbors(word_list, len(begin_word))
 
         while len(start_queue) > 0 and len(end_queue) > 0:
-            if len(start_queue) > 0:
-                start_current = start_queue.popleft()
+            start_current = start_queue.popleft()
 
-                if start_current.value == end_word:
-                    return start_current.length
+            if start_current.value == end_word:
+                return start_current.length
 
-                if start_current.value in end_visited.keys():
-                    length = start_current.length + end_visited[start_current.value] - 1
-                    return length
+            if start_current.value in end_visited.keys():
+                length = start_current.length + end_visited[start_current.value] - 1
+                return length
 
-                s_current_neighbors = []
+            s_current_neighbors = []
 
-                for i in range(len(start_current.value)):
-                    key = start_current.value[:i] + "*" + start_current.value[i+1:]
-                    s_current_neighbors.extend(neighbors_dict[key])
+            for i in range(len(start_current.value)):
+                key = start_current.value[:i] + "*" + start_current.value[i+1:]
+                s_current_neighbors.extend(neighbors_dict[key])
 
-                for w in s_current_neighbors:
-                    if w not in start_visited.keys():
-                        if w == end_word:
-                            return start_current.length + 1
-                        node = Node(w, start_current.length + 1)
-                        start_queue.append(node)
-                        start_visited[node.value] = node.length
+            for w in s_current_neighbors:
+                if w not in start_visited.keys():
+                    if w == end_word:
+                        return start_current.length + 1
+                    node = Node(w, start_current.length + 1)
+                    start_queue.append(node)
+                    start_visited[node.value] = node.length
 
-            if len(end_queue) > 0:
-                end_current = end_queue.popleft()
+            end_current = end_queue.popleft()
 
-                if end_current.value == begin_word:
-                    return end_current.length
+            if end_current.value == begin_word:
+                return end_current.length
 
-                if end_current.value in start_visited.keys():
-                    length = end_current.length + start_visited[end_current.value] - 1
-                    return length
+            if end_current.value in start_visited.keys():
+                length = end_current.length + start_visited[end_current.value] - 1
+                return length
 
-                e_current_neighbors = []
+            e_current_neighbors = []
 
-                for i in range(len(end_current.value)):
-                    key = end_current.value[:i] + "*" + end_current.value[i+1:]
-                    e_current_neighbors.extend(neighbors_dict[key])
+            for i in range(len(end_current.value)):
+                key = end_current.value[:i] + "*" + end_current.value[i+1:]
+                e_current_neighbors.extend(neighbors_dict[key])
 
-                for w in e_current_neighbors:
-                    if w not in end_visited.keys():
-                        if w == begin_word:
-                            return end_current.length + 1
-                        node = Node(w, end_current.length + 1)
-                        end_queue.append(node)
-                        end_visited[node.value] = node.length
+            for w in e_current_neighbors:
+                if w not in end_visited.keys():
+                    if w == begin_word:
+                        return end_current.length + 1
+                    node = Node(w, end_current.length + 1)
+                    end_queue.append(node)
+                    end_visited[node.value] = node.length
 
         return 0
 
