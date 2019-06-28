@@ -15,15 +15,15 @@ class Solution:
         start_vertex = Node(begin_word, 1)
         end_vertex = Node(end_word, 1)
 
-        start_queue = [start_vertex]
-        end_queue = [end_vertex]
+        start_queue = deque([start_vertex])
+        end_queue = deque([end_vertex])
 
         start_visited = {start_vertex.value: start_vertex.length}
         end_visited = {end_vertex.value: end_vertex.length}
 
         while len(start_queue) > 0 or len(end_queue) > 0:
             if len(start_queue) > 0:
-                start_current = start_queue.pop(0)
+                start_current = start_queue.popleft()
 
                 if start_current.value == end_word:
                     return start_current.length
@@ -41,7 +41,7 @@ class Solution:
                         start_visited[node.value] = node.length
 
             if len(end_queue) > 0:
-                end_current = end_queue.pop(0)
+                end_current = end_queue.popleft()
 
                 if end_current.value == begin_word:
                     return end_current.length
