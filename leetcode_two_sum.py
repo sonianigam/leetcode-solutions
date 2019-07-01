@@ -8,8 +8,6 @@ class Solution:
             complement = target - nums[i]
             
             if complement in nums_dict.keys():
-                print(nums_dict)
                 return [min(i, nums_dict[complement]), max(i, nums_dict[complement])]
             else:
                 nums_dict[nums[i]] = i
-            
