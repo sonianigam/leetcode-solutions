@@ -7,10 +7,8 @@ class Solution:
         num_rows = len(matrix)
         num_columns = len(matrix[0])
         zero_indices = []
-        #replace
-        output = [[1,1,1],
-                 [1,1,1],
-                 [1,1,1]]
+
+        output = [[1 for i in range(num_columns)] for i in range(num_rows)]
 
         for x in range(num_rows):
             for y in range(num_columns):
@@ -25,8 +23,7 @@ class Solution:
                     break
 
                 for z in zero_indices:
-                    if min_dist == 1:
-                        break
+                    if min_dist == 1: break
 
                     x_dist = abs(z[0] - x)
                     y_dist = abs(z[1] - y)
@@ -37,9 +34,3 @@ class Solution:
 
                 output[x][y] = min_dist
         return output
-
-### Questions
-# float(inf)?
-# if statement in one line
-# set up list without linking
-# formatted print
