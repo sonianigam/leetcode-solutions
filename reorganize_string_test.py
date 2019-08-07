@@ -8,4 +8,3 @@ def test_happy_path():
 
 def test_sad_path():
     assert solution.reorganize_string("aaab") == ""
-

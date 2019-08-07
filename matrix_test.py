@@ -10,7 +10,7 @@ def test_case_one():
                 [0,1,0], 
                 [0,0,0]]
 
-    assert(matrix.Solution().update_matrix(m_input) == m_output)
+    assert matrix.Solution().update_matrix(m_input) == m_output
 
 def test_case_two():
     m_input = [[0,0,0],
@@ -21,4 +21,4 @@ def test_case_two():
                 [0,1,0], 
                 [1,2,1]]
 
-    assert(matrix.Solution().update_matrix(m_input) == m_output)
+    assert matrix.Solution().update_matrix(m_input) == m_output

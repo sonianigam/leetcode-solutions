@@ -6,7 +6,7 @@ class Solution:
 
         for i in range(len(nums)):
             complement = target - nums[i]
-            
+
             if complement in nums_dict.keys():
                 return [min(i, nums_dict[complement]), max(i, nums_dict[complement])]
             else:
